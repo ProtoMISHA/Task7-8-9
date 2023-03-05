@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      author: ProtoMISHA
+      id: insert_group_meters
+      context: dev
+      changes:
+        - insert:
+            tableName: group_meter
+            columns:
+              - column:
+                  name: name
+                  value: room1
+        - insert:
+            tableName: group_meter
+            columns:
+              - column:
+                  name: name
+                  value: room2
+        - insert:
+            tableName: group_meter
+            columns:
+              - column:
+                  name: name
+                  value: room3
+        - insert:
+            tableName: group_meter
+            columns:
+              - column:
+                  name: name
+                  value: room4
+        - insert:
+            tableName: group_meter
+            columns:
+              - column:
+                  name: name
+                  value: room5
+  - changeSet:
+      author: ProtoMISHA
+      id: addTestMeter
+      context: dev
+      changes:
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM111',(SELECT id FROM group_meter WHERE name='room1'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM111',(SELECT id FROM group_meter WHERE name='room1'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM222',(SELECT id FROM group_meter WHERE name='room2'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM222',(SELECT id FROM group_meter WHERE name='room2'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM333',(SELECT id FROM group_meter WHERE name='room3'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM333',(SELECT id FROM group_meter WHERE name='room3'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM444',(SELECT id FROM group_meter WHERE name='room4'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM444',(SELECT id FROM group_meter WHERE name='room4'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM444',(SELECT id FROM group_meter WHERE name='room5'))
+        - sql:
+            sql: INSERT INTO meter(meter_type, group_id) VALUES('ELM444',(SELECT id FROM group_meter WHERE name='room5'))

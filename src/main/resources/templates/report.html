@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Группа</th>
+        <th>Мин показание</th>
+        <th>Макс показание</th>
+        <th>Расход</th>
+    </tr>
+    </thead>
+    <tbody th:each="group : ${entryList}">
+    <tr>
+        <td colspan="4" th:text="${group.getKey()}"></td>
+    </tr>
+    <tr th:each="meter : ${group.getValue().entrySet()}">
+        <td th:text="${meter.getKey()}"></td>
+        <td th:text="${meter.getValue().get(0)}"></td>
+        <td th:text="${meter.getValue().get(1)}"></td>
+        <td th:text="${meter.getValue().get(1).subtract(meter.getValue().get(0))}"></td>
+    </tr>
+    <tr>
+        <td colspan="3" th:text="${'Итого ' + group.getKey().toString() + ':'}"></td>
+        <td th:text="${group.getValue().values().stream().map(listToBigDecimal).reduce(bigDecimalReduce).get()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

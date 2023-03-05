@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  mysql_task_local:
+    image: mysql:8.0.26
+    volumes:
+      - electric_meter:/var/lib/mysql
+    ports:
+      - "33062:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: electric_meter_local
+    mem_limit: 1g
+volumes:
+  electric_meter:
+

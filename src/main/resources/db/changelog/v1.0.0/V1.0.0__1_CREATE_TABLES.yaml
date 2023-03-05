@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: createGroupMeterTable1
+      context: prod
+      author: ProtoMISHA
+      changes:
+        createTable:
+          tableName: group_meter
+          columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  primaryKeyName: group_meter_pk
+                  nullable: false
+            - column:
+                name: name
+                type: VARCHAR(255)
+                constraints:
+                  unique: true
+  - changeSet:
+      id: createMeterTable1
+      context: prod
+      author: ProtoMISHA
+      changes:
+        createTable:
+          tableName: meter
+          columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  primaryKeyName: meter_pk
+                  nullable: false
+            - column:
+                name: meter_type
+                type: VARCHAR(255)
+            - column:
+                name: group_id
+                type: BIGINT
+                constraints:
+                  foreignKeyName: group_meter_fk_id
+                  references: group_meter(id)
+                  nullable: false
+  - changeSet:
+      id: createMeterResultsTable
+      context: prod
+      author: ProtoMISHA
+      changes:
+        createTable:
+          tableName: meter_result
+          columns:
+            - column:
+                name: id
+                type: BIGINT
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  primaryKeyName: meter_pk
+                  nullable: false
+            - column:
+                name: meter_id
+                type: BIGINT
+                constraints:
+                  foreignKeyName: meter_fk_id
+                  references: meter(id)
+                  nullable: false
+            - column:
+                name: reading_date
+                type: DATETIME
+                constraints:
+                  nullable: false
+            - column:
+                name: current_reading
+                type: DECIMAL
+                constraints:
+                  nullable: false
